@@ -11,38 +11,68 @@
 <div class="app">
   <header class="app-header">
     <h1>🎲 Random Team Picker</h1>
-    <p class="subtitle">Namen rein, Teams raus.</p>
   </header>
 
-  <section id="setup" class="panel">
-    <div class="field">
-      <label for="namesInput">Spielernamen <span class="hint">(einer pro Zeile)</span></label>
-      <textarea id="namesInput" rows="10" placeholder="Anna&#10;Ben&#10;Charlie&#10;Dana&#10;..."></textarea>
-    </div>
-
-    <div class="field-row">
-      <div class="field">
-        <label for="teamSizeInput">Spieler pro Team</label>
-        <input type="number" id="teamSizeInput" min="1" value="4">
+  <section class="toolbar">
+    <div class="toolbar-group">
+      <label for="playerNameInput">Spieler hinzufügen</label>
+      <div class="input-row">
+        <input type="text" id="playerNameInput" placeholder="Name…" maxlength="30" autocomplete="off">
+        <button id="addPlayerBtn" class="icon-btn" title="Spieler hinzufügen" type="button">+</button>
       </div>
     </div>
 
-    <div class="field">
-      <label for="teamNamesInput">Teamnamen <span class="hint">(optional, einer pro Zeile — sonst "Team 1", "Team 2", ...)</span></label>
-      <textarea id="teamNamesInput" rows="4" placeholder="Team Falken&#10;Team Adler&#10;..."></textarea>
+    <div class="toolbar-group">
+      <label for="teamSizeInput">Spieler / Team</label>
+      <input type="number" id="teamSizeInput" min="1" value="4">
     </div>
 
-    <p id="errorMsg" class="error" hidden></p>
+    <div class="toolbar-group">
+      <label id="distributionLabel">Verteilung</label>
+      <div class="segmented" role="radiogroup" aria-labelledby="distributionLabel">
+        <button type="button" class="segmented-btn active" data-mode="even" role="radio" aria-checked="true">Gleichverteilt</button>
+        <button type="button" class="segmented-btn" data-mode="fill" role="radio" aria-checked="false">Füllen</button>
+      </div>
+    </div>
 
-    <button id="startBtn" class="primary-btn">🔀 Teams auslosen</button>
+    <div class="toolbar-group">
+      <label for="seedInput">Seed <span class="hint">(optional)</span></label>
+      <input type="text" id="seedInput" placeholder="leer = zufällig" maxlength="40" autocomplete="off">
+    </div>
+
+    <div class="toolbar-group team-name-group">
+      <label for="teamNameInput">Teamnamen <span class="hint">(optional)</span></label>
+      <div class="input-row">
+        <input type="text" id="teamNameInput" placeholder="z.B. Team Falken" maxlength="24" autocomplete="off">
+        <button id="addTeamNameBtn" class="icon-btn" title="Teamnamen hinzufügen" type="button">+</button>
+      </div>
+      <div id="teamNameChips" class="chip-row"></div>
+      <div class="suggestions-block">
+        <div class="suggestions-header">
+          <span class="hint">💡 Vorschläge</span>
+          <button id="refreshSuggestionsBtn" class="text-btn" type="button" title="Neue Vorschläge">🔄</button>
+        </div>
+        <div id="teamNameSuggestions" class="chip-row suggestions-row"></div>
+      </div>
+    </div>
+
+    <button id="drawBtn" class="primary-btn" type="button">🔀 Teams auslosen</button>
   </section>
 
-  <section id="stage" class="stage" hidden>
-    <div id="deck" class="deck"></div>
-    <div id="teams" class="teams"></div>
-    <div class="stage-actions">
-      <button id="resetBtn" class="secondary-btn" hidden>↺ Neu starten</button>
+  <p id="errorMsg" class="error" hidden></p>
+
+  <section class="pool-section">
+    <h2>Spieler-Pool <span id="poolCount" class="count-badge">0</span></h2>
+    <div id="pool" class="tile-list dropzone" data-team-index="-1"></div>
+    <p id="poolEmptyHint" class="empty-hint">Noch keine Spieler – oben Namen hinzufügen.</p>
+  </section>
+
+  <section id="teamsSection" class="teams-section" hidden>
+    <div id="drawMeta" class="draw-meta" hidden>
+      <span id="drawMetaText"></span>
+      <button id="downloadCertBtn" class="text-btn" type="button">🖼️ Urkunde herunterladen</button>
     </div>
+    <div id="teams" class="teams"></div>
   </section>
 </div>
 
