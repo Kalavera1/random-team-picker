@@ -1,0 +1,326 @@
+:root {
+  --bg: #0f1220;
+  --bg-panel: #171b2e;
+  --bg-panel-2: #1d2238;
+  --text: #eef0fb;
+  --text-dim: #9aa0c3;
+  --accent: #7c5cff;
+  --accent-2: #22d3ee;
+  --border: #2a2f4a;
+  --error: #ff6b6b;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  --team-colors: #7c5cff, #22d3ee, #ff6b9d, #ffb84d, #4ade80, #ff8a5c, #5ce1e6, #c084fc;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 20% -10%, rgba(124, 92, 255, 0.18), transparent 40%),
+    radial-gradient(circle at 90% 10%, rgba(34, 211, 238, 0.12), transparent 35%),
+    var(--bg);
+  color: var(--text);
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem 4rem;
+}
+
+.app {
+  width: 100%;
+  max-width: 960px;
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.app-header h1 {
+  font-size: 2.2rem;
+  margin: 0 0 0.3rem;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.subtitle {
+  color: var(--text-dim);
+  margin: 0;
+}
+
+.panel {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.75rem;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.field-row {
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+label {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.hint {
+  font-weight: 400;
+  color: var(--text-dim);
+  font-size: 0.82rem;
+}
+
+textarea,
+input[type="number"] {
+  background: var(--bg-panel-2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text);
+  padding: 0.7rem 0.9rem;
+  font-size: 0.95rem;
+  font-family: inherit;
+  resize: vertical;
+}
+
+input[type="number"] {
+  width: 140px;
+}
+
+textarea:focus,
+input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(124, 92, 255, 0.25);
+}
+
+.error {
+  background: rgba(255, 107, 107, 0.12);
+  border: 1px solid rgba(255, 107, 107, 0.4);
+  color: var(--error);
+  padding: 0.7rem 0.9rem;
+  border-radius: 10px;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.primary-btn,
+.secondary-btn {
+  border: none;
+  border-radius: 12px;
+  padding: 0.9rem 1.4rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+}
+
+.primary-btn {
+  align-self: flex-start;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  color: #0b0d19;
+}
+
+.primary-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(124, 92, 255, 0.35);
+}
+
+.primary-btn:active {
+  transform: translateY(0);
+}
+
+.secondary-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+.secondary-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.stage {
+  position: relative;
+  min-height: 420px;
+  padding-top: 1rem;
+}
+
+.deck {
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90px;
+  height: 128px;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.deck-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 90px;
+  height: 128px;
+}
+
+.teams {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 1.25rem;
+  margin-top: 9rem;
+}
+
+.team-column {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1rem;
+  min-height: 140px;
+  position: relative;
+  overflow: hidden;
+}
+
+.team-column::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--team-color, var(--accent));
+}
+
+.team-column h3 {
+  margin: 0.35rem 0 0.75rem;
+  font-size: 1.05rem;
+  color: var(--team-color, var(--accent));
+}
+
+.team-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.team-list li {
+  background: var(--bg-panel-2);
+  border-radius: 8px;
+  padding: 0.45rem 0.7rem;
+  font-size: 0.92rem;
+  opacity: 0;
+  transform: translateY(6px);
+  animation: pop-in 0.35s ease forwards;
+}
+
+@keyframes pop-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stage-actions {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+/* -- Card + shuffle/flip effect -- */
+
+.card {
+  position: absolute;
+  width: 90px;
+  height: 128px;
+  perspective: 800px;
+  z-index: 10;
+  transition: top 0.6s cubic-bezier(0.22, 0.61, 0.36, 1), left 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease;
+}
+
+.card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backface-visibility: hidden;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+  text-align: center;
+  padding: 0.4rem;
+  font-weight: 700;
+}
+
+.card-front {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  font-size: 1.8rem;
+}
+
+.card-back {
+  background: var(--bg-panel-2);
+  border: 1px solid var(--accent);
+  color: var(--text);
+  transform: rotateY(180deg);
+  font-size: 0.85rem;
+  word-break: break-word;
+}
+
+@keyframes shuffle-jitter {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  20% { transform: translate(-4px, -2px) rotate(-4deg); }
+  40% { transform: translate(3px, 2px) rotate(3deg); }
+  60% { transform: translate(-3px, 1px) rotate(-3deg); }
+  80% { transform: translate(4px, -1px) rotate(4deg); }
+}
+
+.deck.shuffling .deck-card {
+  animation: shuffle-jitter 0.35s ease-in-out infinite;
+}
+
+@media (max-width: 560px) {
+  .panel {
+    padding: 1.1rem;
+  }
+
+  .primary-btn {
+    align-self: stretch;
+  }
+
+  .teams {
+    margin-top: 8rem;
+  }
+}

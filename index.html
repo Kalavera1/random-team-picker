@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Random Team Picker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+  <header class="app-header">
+    <h1>🎲 Random Team Picker</h1>
+    <p class="subtitle">Namen rein, Teams raus.</p>
+  </header>
+
+  <section id="setup" class="panel">
+    <div class="field">
+      <label for="namesInput">Spielernamen <span class="hint">(einer pro Zeile)</span></label>
+      <textarea id="namesInput" rows="10" placeholder="Anna&#10;Ben&#10;Charlie&#10;Dana&#10;..."></textarea>
+    </div>
+
+    <div class="field-row">
+      <div class="field">
+        <label for="teamSizeInput">Spieler pro Team</label>
+        <input type="number" id="teamSizeInput" min="1" value="4">
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="teamNamesInput">Teamnamen <span class="hint">(optional, einer pro Zeile — sonst "Team 1", "Team 2", ...)</span></label>
+      <textarea id="teamNamesInput" rows="4" placeholder="Team Falken&#10;Team Adler&#10;..."></textarea>
+    </div>
+
+    <p id="errorMsg" class="error" hidden></p>
+
+    <button id="startBtn" class="primary-btn">🔀 Teams auslosen</button>
+  </section>
+
+  <section id="stage" class="stage" hidden>
+    <div id="deck" class="deck"></div>
+    <div id="teams" class="teams"></div>
+    <div class="stage-actions">
+      <button id="resetBtn" class="secondary-btn" hidden>↺ Neu starten</button>
+    </div>
+  </section>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
